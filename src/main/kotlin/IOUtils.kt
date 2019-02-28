@@ -25,6 +25,7 @@ object IOUtils {
         return data
     }
 
+
     fun getScore(slide1: Slide, slide2: Slide): Int {
         var commonTags = 0
         // Number of common tags
