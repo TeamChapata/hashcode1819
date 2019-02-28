@@ -25,9 +25,8 @@ object IOUtils {
         return data
     }
 
-    fun getScore(slice1: Slice, slice2: Slice) {
+    fun getScore(slice1: Slide, slice2: Slice) {
         var commonTags = 0
-git s
         // Number of common tags
 
         for(topic in slice1.topics){
