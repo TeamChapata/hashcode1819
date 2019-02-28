@@ -24,5 +24,5 @@ class Data (val len: Int) {
         return ret
     }*/
 
-
+    
 }
