@@ -4,20 +4,23 @@ object Main {
     fun main(args: Array<String>) {
 
         var accumulateScore = 0
-        var bestScore = 0
+        var bestScore = -1
 
         var bestSolution: MutableList<Slide> = mutableListOf<Slide>()
 
-        val loopTimes = 10
+        val loopTimes = 1
         //val inputName = "e_shiny_selfies"
         val inputName = "a_example"
         var verticalImage: Photo? = null
 
-        for (i in 1.. loopTimes) {
+        for (i in 1..loopTimes) {
             println("Loop: $i")
             val data = IOUtils.loadData("./src/main/resources/$inputName.txt")
             val slides: MutableList<Slide> = mutableListOf<Slide>()
             while (!data.photos.isEmpty()) { // Buscamos la siguiente foto a añadir
+                println("Buscamos imagen")
+                println(data.photos)
+                println(slides)
                 val auxPhoto: Photo = data.photos.random() // Cogemos una imagen aleatoria
 
                 if (auxPhoto.orientation == Photo.Orientation.VERTICAL) { // La imagen es vertical
@@ -25,7 +28,8 @@ object Main {
                     if(verticalImage != null){ // Habiamos guardado una imagen vertical
                         val auxSlide = Slide(auxPhoto,verticalImage)
                         if (!slides.isEmpty()) { // No es el primer Slide
-                            accumulateScore += IOUtils.getScore(auxSlide, slides.last())
+                            var aux = IOUtils.getScore(auxSlide, slides.last())
+                            accumulateScore += aux
                         }
                         slides.add(auxSlide)
                         data.photos.remove(auxPhoto)
@@ -40,7 +44,8 @@ object Main {
                             if(partner.orientation == Photo.Orientation.VERTICAL){ // Encontramos una imagen vertical
                                 val auxSlide = Slide(auxPhoto,partner)
                                 if (!slides.isEmpty()) { // No es la primera Slide
-                                    accumulateScore += IOUtils.getScore(auxSlide, slides.last())
+                                    var aux = IOUtils.getScore(auxSlide, slides.last())
+                                    accumulateScore += aux
                                 }
                                 slides.add(auxSlide)
                                 data.photos.remove(auxPhoto)
@@ -59,7 +64,8 @@ object Main {
                 } else if (auxPhoto.orientation == Photo.Orientation.HORIZONTAL) { // La imagen es horizontal
                     val auxSlide = Slide(auxPhoto)
                     if (!slides.isEmpty()) {
-                        accumulateScore += IOUtils.getScore(auxSlide, slides.last())
+                        var aux = IOUtils.getScore(auxSlide, slides.last())
+                        accumulateScore += aux
                     }
                     slides.add(auxSlide)
                     data.photos.remove(auxPhoto)
@@ -69,10 +75,14 @@ object Main {
                 bestScore = accumulateScore
                 bestSolution.addAll(slides)
                 accumulateScore = 0
+                println(slides)
             }
+            println(data.photos)
+            println(slides)
 
         }
-        println("Best score: $bestSolution")
+        println("Best Solution: $bestSolution")
+        println("Best score: $bestScore")
         //getSolutionOf(bestSolution)
     }
 }
