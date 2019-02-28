@@ -13,9 +13,11 @@ object Main {
         val inputName = "a_example"
         var verticalImage: Photo? = null
 
+        val originData = IOUtils.loadData("./src/main/resources/$inputName.txt")
+
         for (i in 1.. loopTimes) {
             println("Loop: $i")
-            val data = IOUtils.loadData("./src/main/resources/$inputName.txt")
+            val data = originData.clone()
             val slides: MutableList<Slide> = mutableListOf<Slide>()
             while (!data.photos.isEmpty()) { // Buscamos la siguiente foto a añadir
                 val auxPhoto: Photo = data.photos.random() // Cogemos una imagen aleatoria
@@ -73,6 +75,7 @@ object Main {
 
         }
         println("Best score: $bestSolution")
-        //getSolutionOf(bestSolution)
+        print(IOUtils.getScore(Slide(originData.photos[0]),Slide(originData.photos[1])))
+        //IOUtils.writeData("output", bestSolution)
     }
 }
