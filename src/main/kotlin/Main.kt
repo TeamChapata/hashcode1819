@@ -7,6 +7,6 @@ object Main {
 
         val data = IOUtils.loadData("./src/main/resources/$inputName.txt")
 
-        print(data)
+        print(data.clone())
     }
 }
