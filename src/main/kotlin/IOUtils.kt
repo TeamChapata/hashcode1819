@@ -41,7 +41,18 @@ object IOUtils {
         return Math.min(Math.min(commonTags, inS1notS2),inS2notS1)
     }
 
-    fun writeData() {
+    fun writeData(fileName: String, result: MutableList<Slide>) {
+        val destination = File("./src/main/resources/$fileName.out").bufferedWriter()
+        destination.write(result.size)
+        destination.newLine()
+        for(slide in result) {
+            if(slide.photo2 == null) {
+                destination.write("${slide.photo1.id}\n")
+            } else {
+                destination.write("${slide.photo1.id} ${slide.photo2.id}\n")
+            }
 
+        }
+        destination.close()
     }
 }
