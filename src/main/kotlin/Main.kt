@@ -75,7 +75,7 @@ object Main {
 
         }
         println("Best score: $bestSolution")
-        print(IOUtils.getScore(Slide(originData.photos[0]),Slide(originData.photos[1])))
-        //IOUtils.writeData("output", bestSolution)
+        //print(IOUtils.getScore(Slide(originData.photos[0]),Slide(originData.photos[1])))
+        IOUtils.writeData("output", bestSolution)
     }
 }
