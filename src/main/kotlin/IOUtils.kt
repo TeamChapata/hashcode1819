@@ -1,5 +1,8 @@
 import java.io.File
 import java.util.*
+import java.util.ArrayList
+
+
 
 object IOUtils {
 
@@ -27,7 +30,20 @@ object IOUtils {
 
 
     fun getScore(slide1: Slide, slide2: Slide): Int {
+
+
+/*
+        val list = ArrayList<Topic>()
+
+        for (t in slide1.topics) {
+            if (slide2.topics.contains(t)) {
+                list.add(t)
+            }
+        }*/
+
         var commonTags = 0
+
+
         // Number of common tags
 
         for(topic in slide1.topics){
@@ -39,13 +55,12 @@ object IOUtils {
         val inS1notS2 = slide1.topics.size - commonTags
         val inS2notS1 = slide2.topics.size - commonTags
 
-        return Math.min(Math.min(commonTags, inS1notS2),inS2notS1)
+        return Math.max(Math.max(commonTags, inS1notS2),inS2notS1)
     }
 
     fun writeData(fileName: String, result: MutableList<Slide>) {
         val destination = File("./src/main/resources/$fileName.out").bufferedWriter()
-        destination.write(result.size)
-        destination.newLine()
+        destination.write("${result.size}\n")
         for(slide in result) {
             if(slide.photo2 == null) {
                 destination.write("${slide.photo1.id}\n")

@@ -12,10 +12,11 @@ object Main {
         //val inputName = "e_shiny_selfies"
         val inputName = "a_example"
         var verticalImage: Photo? = null
+        val originData = IOUtils.loadData("./src/main/resources/$inputName.txt")
 
-        for (i in 1..loopTimes) {
+        for (i in 1.. loopTimes) {
             println("Loop: $i")
-            val data = IOUtils.loadData("./src/main/resources/$inputName.txt")
+            val data = originData.clone()
             val slides: MutableList<Slide> = mutableListOf<Slide>()
             while (!data.photos.isEmpty()) { // Buscamos la siguiente foto a añadir
                 println("Buscamos imagen")
@@ -81,8 +82,10 @@ object Main {
             println(slides)
 
         }
-        println("Best Solution: $bestSolution")
-        println("Best score: $bestScore")
-        //getSolutionOf(bestSolution)
+
+        println("Best score: $bestSolution")
+        //print(IOUtils.getScore(Slide(originData.photos[0]),Slide(originData.photos[1])))
+        IOUtils.writeData("output", bestSolution)
+
     }
 }
