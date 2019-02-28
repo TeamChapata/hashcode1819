@@ -34,7 +34,8 @@ object Main {
 
                     } else { // No habiamos guardado imagen vertical
                         var finded = false
-                        verticalSearch@for(j in 1..100) { // Buscamos entre 100 imagenes aleatorias una vertical
+                        verticalSearch@for(j in 1..4) { // Buscamos entre 100 imagenes aleatorias una vertical
+                            println("Buscando vertical $j")
                             val partner = data.photos.random()
                             if(partner.orientation == Photo.Orientation.VERTICAL){ // Encontramos una imagen vertical
                                 val auxSlide = Slide(auxPhoto,partner)
@@ -61,11 +62,12 @@ object Main {
                         accumulateScore += IOUtils.getScore(auxSlide, slides.last())
                     }
                     slides.add(auxSlide)
+                    data.photos.remove(auxPhoto)
                 }
             }
             if(accumulateScore > bestScore){
                 bestScore = accumulateScore
-                slides.addAll(bestSolution)
+                bestSolution.addAll(slides)
                 accumulateScore = 0
             }
 
