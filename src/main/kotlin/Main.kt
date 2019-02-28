@@ -41,7 +41,7 @@ object Main {
                         verticalSearch@for(j in 1..4) { // Buscamos entre 100 imagenes aleatorias una vertical
                             println("Buscando vertical $j")
                             val partner = data.photos.random()
-                            if(partner.orientation == Photo.Orientation.VERTICAL){ // Encontramos una imagen vertical
+                            if(partner.orientation == Photo.Orientation.VERTICAL && partner != auxPhoto){ // Encontramos una imagen vertical
                                 val auxSlide = Slide(auxPhoto,partner)
                                 if (!slides.isEmpty()) { // No es la primera Slide
                                     var aux = IOUtils.getScore(auxSlide, slides.last())
