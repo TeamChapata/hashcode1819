@@ -4,10 +4,12 @@ class Slide (val photo1: Photo, val photo2: Photo? = null) {
         assert(photo1.orientation == Photo.Orientation.HORIZONTAL && photo2!!.orientation == Photo.Orientation.HORIZONTAL)
     }
 
-    fun getTags(): MutableList<Topic> {
+
+    val topics: MutableList<Topic>
+        get() {
         var topics: MutableList<Topic> = ArrayList()
 
-        topics = photo1.topics;
+        topics = photo1.topics
 
         if (photo2 != null){
             for (topic in photo2.topics){
