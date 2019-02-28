@@ -8,9 +8,9 @@ object Main {
 
         var bestSolution: MutableList<Slide> = mutableListOf<Slide>()
 
-        val loopTimes = 1
-        //val inputName = "e_shiny_selfies"
-        val inputName = "a_example"
+        val loopTimes = 100
+        val inputName = "b_lovely_landscapes"
+        //val inputName = "a_example"
         var verticalImage: Photo? = null
         val originData = IOUtils.loadData("./src/main/resources/$inputName.txt")
 
@@ -20,8 +20,6 @@ object Main {
             val slides: MutableList<Slide> = mutableListOf<Slide>()
             while (!data.photos.isEmpty()) { // Buscamos la siguiente foto a añadir
                 println("Buscamos imagen")
-                println(data.photos)
-                println(slides)
                 val auxPhoto: Photo = data.photos.random() // Cogemos una imagen aleatoria
 
                 if (auxPhoto.orientation == Photo.Orientation.VERTICAL) { // La imagen es vertical
@@ -83,9 +81,10 @@ object Main {
 
         }
 
-        println("Best score: $bestSolution")
+        //println("Best Solution: $bestSolution")
+        println("Best score $bestScore")
         //print(IOUtils.getScore(Slide(originData.photos[0]),Slide(originData.photos[1])))
-        IOUtils.writeData("output", bestSolution)
+        IOUtils.writeData("${inputName}-output", bestSolution)
 
     }
 }
