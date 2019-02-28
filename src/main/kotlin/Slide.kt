@@ -1,7 +1,7 @@
 class Slide (val photo1: Photo, val photo2: Photo? = null) {
     init {
         assert(!(photo1.orientation == Photo.Orientation.VERTICAL && photo2 == null))
-        assert(photo1.orientation == Photo.Orientation.HORIZONTAL && photo2!!.orientation == Photo.Orientation.HORIZONTAL)
+        assert(photo1.orientation == Photo.Orientation.HORIZONTAL && photo2 != null)
     }
 
 

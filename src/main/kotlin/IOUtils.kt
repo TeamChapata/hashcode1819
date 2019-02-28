@@ -39,6 +39,9 @@ object IOUtils {
         val inS2notS1 = slide2.topics.size - commonTags
 
         return Math.min(Math.min(commonTags, inS1notS2),inS2notS1)
+    }
+
+    fun writeData() {
 
     }
 }
