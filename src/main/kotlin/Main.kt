@@ -9,8 +9,8 @@ object Main {
         var bestSolution: MutableList<Slide> = mutableListOf<Slide>()
 
         val loopTimes = 10
-        //val inputName = "e_shiny_selfies"
-        val inputName = "a_example"
+        val inputName = "e_shiny_selfies"
+        //val inputName = "a_example"
         var verticalImage: Photo? = null
 
         val originData = IOUtils.loadData("./src/main/resources/$inputName.txt")
