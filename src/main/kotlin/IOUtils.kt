@@ -22,7 +22,23 @@ object IOUtils {
             }
             data.photos.add(photo)
         }
-
         return data
+    }
+
+    fun getScore(slide1: Slide, slide2: Slide): Int {
+        var commonTags = 0
+        // Number of common tags
+
+        for(topic in slide1.topics){
+            if(slide2.topics.contains(topic)) {
+                commonTags += 1
+            }
+        }
+
+        val inS1notS2 = slide1.topics.size - commonTags
+        val inS2notS1 = slide2.topics.size - commonTags
+
+        return Math.min(Math.min(commonTags, inS1notS2),inS2notS1)
+
     }
 }
