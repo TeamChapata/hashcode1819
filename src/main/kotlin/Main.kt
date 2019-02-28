@@ -4,15 +4,15 @@ object Main {
     fun main(args: Array<String>) {
 
         var accumulateScore = 0
-        var bestScore = 0
+        var bestScore = -1
 
         var bestSolution: MutableList<Slide> = mutableListOf<Slide>()
 
-        val loopTimes = 10
-        val inputName = "e_shiny_selfies"
+
+        val loopTimes = 100
+        val inputName = "b_lovely_landscapes"
         //val inputName = "a_example"
         var verticalImage: Photo? = null
-
         val originData = IOUtils.loadData("./src/main/resources/$inputName.txt")
 
         for (i in 1.. loopTimes) {
@@ -20,6 +20,7 @@ object Main {
             val data = originData.clone()
             val slides: MutableList<Slide> = mutableListOf<Slide>()
             while (!data.photos.isEmpty()) { // Buscamos la siguiente foto a añadir
+                println("Buscamos imagen")
                 val auxPhoto: Photo = data.photos.random() // Cogemos una imagen aleatoria
 
                 if (auxPhoto.orientation == Photo.Orientation.VERTICAL) { // La imagen es vertical
@@ -27,7 +28,8 @@ object Main {
                     if(verticalImage != null){ // Habiamos guardado una imagen vertical
                         val auxSlide = Slide(auxPhoto,verticalImage)
                         if (!slides.isEmpty()) { // No es el primer Slide
-                            accumulateScore += IOUtils.getScore(auxSlide, slides.last())
+                            var aux = IOUtils.getScore(auxSlide, slides.last())
+                            accumulateScore += aux
                         }
                         slides.add(auxSlide)
                         data.photos.remove(auxPhoto)
@@ -39,10 +41,11 @@ object Main {
                         verticalSearch@for(j in 1..4) { // Buscamos entre 100 imagenes aleatorias una vertical
                             println("Buscando vertical $j")
                             val partner = data.photos.random()
-                            if(partner.orientation == Photo.Orientation.VERTICAL){ // Encontramos una imagen vertical
+                            if(partner.orientation == Photo.Orientation.VERTICAL && partner != auxPhoto){ // Encontramos una imagen vertical
                                 val auxSlide = Slide(auxPhoto,partner)
                                 if (!slides.isEmpty()) { // No es la primera Slide
-                                    accumulateScore += IOUtils.getScore(auxSlide, slides.last())
+                                    var aux = IOUtils.getScore(auxSlide, slides.last())
+                                    accumulateScore += aux
                                 }
                                 slides.add(auxSlide)
                                 data.photos.remove(auxPhoto)
@@ -61,7 +64,8 @@ object Main {
                 } else if (auxPhoto.orientation == Photo.Orientation.HORIZONTAL) { // La imagen es horizontal
                     val auxSlide = Slide(auxPhoto)
                     if (!slides.isEmpty()) {
-                        accumulateScore += IOUtils.getScore(auxSlide, slides.last())
+                        var aux = IOUtils.getScore(auxSlide, slides.last())
+                        accumulateScore += aux
                     }
                     slides.add(auxSlide)
                     data.photos.remove(auxPhoto)
@@ -71,11 +75,17 @@ object Main {
                 bestScore = accumulateScore
                 bestSolution.addAll(slides)
                 accumulateScore = 0
+                println(slides)
             }
+            println(data.photos)
+            println(slides)
 
         }
-        println("Best score: $bestSolution")
+
+        //println("Best Solution: $bestSolution")
+        println("Best score $bestScore")
         //print(IOUtils.getScore(Slide(originData.photos[0]),Slide(originData.photos[1])))
-        IOUtils.writeData("output", bestSolution)
+        IOUtils.writeData("${inputName}-output", bestSolution)
+
     }
 }
