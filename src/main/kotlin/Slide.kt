@@ -13,5 +13,18 @@ class Slide (val photo1: Photo, val photo2: Photo? = null) {
         if (photo2 != null) {
             this.topics.addAll(photo2.topics)
         }
+
+        var resultado: MutableList<Topic> = ArrayList()
+        var aux: MutableList<String> = ArrayList()
+
+        for (topic in topics) {
+            aux.add(topic.topic)
+        }
+
+        aux = aux.distinct().toMutableList()
+
+        for (topicName in aux){
+            resultado.add(Topic(topicName))
+        }
     }
 }
