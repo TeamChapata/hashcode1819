@@ -14,7 +14,7 @@ class Slide (val photo1: Photo, val photo2: Photo? = null) {
             this.topics.addAll(photo2.topics)
         }
 
-        val resultado: MutableList<Topic> = ArrayList()
+        val result: MutableList<Topic> = ArrayList()
         var aux: MutableList<String> = ArrayList()
 
         for (topic in topics) {
@@ -24,10 +24,10 @@ class Slide (val photo1: Photo, val photo2: Photo? = null) {
         aux = aux.distinct().toMutableList()
 
         for (topicName in aux){
-            resultado.add(Topic(topicName))
+            result.add(Topic(topicName))
         }
 
         this.topics.clear()
-        this.topics.addAll(resultado)
+        this.topics.addAll(result)
     }
 }

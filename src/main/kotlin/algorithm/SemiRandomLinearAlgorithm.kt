@@ -16,15 +16,17 @@ object SemiRandomLinearAlgorithm {
         val allVerticalPhotos: MutableList<Photo> = ArrayList()
 
         for(photo in data.photos) {
+            @Suppress("UNUSED_EXPRESSION")
             when(photo.orientation) {
                 Photo.Orientation.HORIZONTAL -> allPossiblesHorizontalSlides.add(Slide(photo))
                 Photo.Orientation.VERTICAL -> allVerticalPhotos.add(photo)
+                Photo.Orientation.NOTHING -> ""
             }
         }
         var bestSolution: MutableList<Slide> = ArrayList()
         var bestScore = 0
         for(i in 0 until numLooops) {
-            println("Loop: $i/$numLooops")
+            //println("Loop: ${i+1}/$numLooops")
             val allPossibleSlides = ArrayList<Slide>(allPossiblesHorizontalSlides)
             val verticalPhotos = ArrayList<Photo>(allVerticalPhotos)
             // match all vertical slides
