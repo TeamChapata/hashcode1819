@@ -70,13 +70,13 @@ object RandomAlgorithm {
                     data.photos.remove(auxPhoto)
                 }
             }
-            if(accumulateScore > bestScore){
+            if(IOUtils.getAllScore(bestSolution) > bestScore){
                 //println("New best solution found")
                 bestScore = accumulateScore
                 bestSolution.clear()
                 bestSolution.addAll(slides)
-                accumulateScore = 0
             }
+            accumulateScore = 0
         }
 
         return OutputData(bestSolution, bestScore)

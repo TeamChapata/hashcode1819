@@ -30,29 +30,16 @@ object IOUtils {
 
 
     fun getScore(slide1: Slide, slide2: Slide): Int {
-                val list = ArrayList<Topic>()
 
-        for (t in slide1.topics) {
-            if (slide2.topics.contains(t)) {
-                list.add(t)
-            }
-        }
+        val auxList = ArrayList(slide1.topics)
+        auxList.retainAll(slide2.topics)
 
-        val commonTags = list.size
-
-
-        // Number of common tags
-
-        /*for(topic in slide1.topics){
-            if(slide2.topics.contains(topic)) {
-                commonTags++
-            }
-        }*/
+        val commonTags = auxList.size
 
         val inS1notS2 = slide1.topics.size - commonTags
         val inS2notS1 = slide2.topics.size - commonTags
 
-        return Math.max(Math.max(commonTags, inS1notS2),inS2notS1)
+        return Math.min(Math.min(commonTags, inS1notS2),inS2notS1)
     }
 
     fun writeData(fileName: String, result: MutableList<Slide>) {
@@ -64,8 +51,15 @@ object IOUtils {
             } else {
                 destination.write("${slide.photo1.id} ${slide.photo2.id}\n")
             }
-
         }
         destination.close()
+    }
+
+    fun getAllScore(result: MutableList<Slide>):Int {
+        var score = 0
+        for(i in 0 until result.size - 1) {
+            score += getScore(result[i], result[i+1])
+        }
+        return score
     }
 }
