@@ -62,4 +62,22 @@ object IOUtils {
         }
         return score
     }
+
+    fun getBestScores(fileName: String): Array<Int> {
+        val scanner = Scanner(File(fileName))
+        val bestScores: Array<Int> = arrayOf(0,0,0,0,0)
+        bestScores[0] = scanner.nextInt()
+        bestScores[1] = scanner.nextInt()
+        bestScores[2] = scanner.nextInt()
+        bestScores[3] = scanner.nextInt()
+        bestScores[4] = scanner.nextInt()
+        return bestScores
+    }
+
+    fun saveBestScores(fileName: String, bestScores: Array<Int>) {
+        val destination = File("./src/main/resources/$fileName").bufferedWriter()
+        destination.write("${bestScores[0]} ${bestScores[1]} ${bestScores[2]} ${bestScores[3]} ${bestScores[4]}")
+
+        destination.close()
+    }
 }

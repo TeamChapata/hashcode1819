@@ -26,7 +26,7 @@ object SemiRandomLinearAlgorithm {
         var bestSolution: MutableList<Slide> = ArrayList()
         var bestScore = 0
         for(i in 0 until numLooops) {
-            //println("Loop: ${i+1}/$numLooops")
+            println("Loop: ${i+1}/$numLooops")
             val allPossibleSlides = ArrayList<Slide>(allPossiblesHorizontalSlides)
             val verticalPhotos = ArrayList<Photo>(allVerticalPhotos)
             // match all vertical slides
