@@ -9,12 +9,13 @@ object Main {
         for(inputName in inputs) {
 
             println("Processing $inputName")
-
+            val from = System.currentTimeMillis()
             val data = IOUtils.loadData("./src/main/resources/$inputName.txt")
-            val solution: OutputData= RandomAlgorithm.randomAlgorithm(data, 10)
+            val solution: OutputData= RandomAlgorithm.randomAlgorithm(data, 100)
+            val to = System.currentTimeMillis()
 
 
-            println("Best score ${solution.bestScore}")
+            println("Best score ${solution.bestScore} in ${to-from} ms")
             IOUtils.writeData("$inputName-output", solution.bestSolution)
         }
 
